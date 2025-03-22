@@ -1,4 +1,3 @@
-// frontend/src/components/BookForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Card, Form, Button } from 'react-bootstrap';
@@ -34,7 +33,7 @@ const BookForm = ({ branch, onBookAdded }) => {
         setTitle('');
         setAuthor('');
         setIsbn('');
-        onBookAdded(); // Trigger book list refresh
+        onBookAdded(); 
       } else {
         toast.error(response.data.message || 'Failed to add book.');
       }
