@@ -1,27 +1,23 @@
-// backend/routes/transactions.js
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/Book');
 const Transaction = require('../models/Transaction');
 
-// Helper function for late fee calculation
 const calculateLateFee = (dueDate, returnDate) => {
   const msPerDay = 24 * 60 * 60 * 1000;
   const daysLate = Math.floor((returnDate - dueDate) / msPerDay);
   if (daysLate > 3) {
-    return (daysLate - 3) * 5; // ₹5 per day after 3-day grace period
+    return (daysLate - 3) * 5; 
   }
   return 0;
 };
 
-// POST /api/transactions/borrow - Borrow a book
 router.post('/borrow', async (req, res) => {
   try {
     const { bookId, memberId, issueDate, dueDate } = req.body;
     if (!bookId || !memberId || !issueDate || !dueDate) {
       return res.status(400).json({ success: false, message: 'Missing required fields' });
     }
-    // Check if book exists and is available
     const book = await Book.findById(bookId);
     if (!book) {
       return res.status(404).json({ success: false, message: 'Book not found' });
@@ -29,11 +25,9 @@ router.post('/borrow', async (req, res) => {
     if (book.status !== 'Available') {
       return res.status(400).json({ success: false, message: 'Book not available for borrowing' });
     }
-    // Update book status
     book.status = 'Borrowed';
     await book.save();
 
-    // Create transaction record
     const transaction = new Transaction({
       book: bookId,
       member: memberId,
@@ -48,7 +42,6 @@ router.post('/borrow', async (req, res) => {
   }
 });
 
-// POST /api/transactions/return - Return a book
 router.post('/return', async (req, res) => {
   try {
     const { transactionId, returnDate } = req.body;
@@ -79,7 +72,6 @@ router.post('/return', async (req, res) => {
   }
 });
 
-// GET /api/transactions/reports/lateFees - Get late fee report
 router.get('/reports/lateFees', async (req, res) => {
   try {
     const transactions = await Transaction.find({ lateFee: { $gt: 0 } })
@@ -91,7 +83,6 @@ router.get('/reports/lateFees', async (req, res) => {
   }
 });
 
-// GET /api/transactions/reports/history - Get borrowing history
 router.get('/reports/history', async (req, res) => {
   try {
     const transactions = await Transaction.find()
@@ -103,7 +94,6 @@ router.get('/reports/history', async (req, res) => {
   }
 });
 
-// GET /api/transactions/overdue - Get overdue transactions
 router.get('/overdue', async (req, res) => {
   try {
     const today = new Date();
