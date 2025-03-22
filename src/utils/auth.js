@@ -1,4 +1,3 @@
-// frontend/src/utils/auth.js
 export const setUserData = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
   };
