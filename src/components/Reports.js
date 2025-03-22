@@ -1,4 +1,3 @@
-// frontend/src/components/Reports.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, Table } from 'react-bootstrap';
