@@ -1,4 +1,3 @@
-// frontend/src/components/BookList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Form, Row, Col, Button, Spinner, Badge } from 'react-bootstrap';
