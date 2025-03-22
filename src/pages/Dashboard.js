@@ -1,4 +1,3 @@
-// frontend/src/pages/Dashboard.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Form } from 'react-bootstrap';
