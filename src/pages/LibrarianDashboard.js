@@ -1,4 +1,3 @@
-// frontend/src/pages/LibrarianDashboard.js
 import React, { useState } from 'react';
 import { Container, Tab, Nav } from 'react-bootstrap';
 import BookForm from '../components/BookForm';
