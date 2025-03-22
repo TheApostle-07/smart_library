@@ -1,4 +1,3 @@
-// frontend/src/pages/MemberDashboard.js
 import React, { useState } from 'react';
 import { Container, Tab, Nav } from 'react-bootstrap';
 import BookList from '../components/BookList';
