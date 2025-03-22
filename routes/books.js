@@ -1,9 +1,7 @@
-// backend/routes/books.js
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/Book');
 
-// GET /api/books?branch=Central&page=1&limit=10
 router.get('/', async (req, res) => {
   try {
     const { branch, status, page = 1, limit = 10 } = req.query;
@@ -36,7 +34,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/books/branches - Get distinct branches
 router.get('/branches', async (req, res) => {
   try {
     const branches = await Book.distinct('branch');
@@ -50,7 +47,6 @@ router.get('/branches', async (req, res) => {
   }
 });
 
-// POST /api/books/:branch - Add a new book
 router.post('/:branch', async (req, res) => {
   try {
     const { branch } = req.params;
@@ -81,7 +77,6 @@ router.post('/:branch', async (req, res) => {
   }
 });
 
-// DELETE /api/books/:branch/:bookId - Delete a book
 router.delete('/:branch/:bookId', async (req, res) => {
   try {
     const { branch, bookId } = req.params;
